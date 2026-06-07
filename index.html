@@ -539,7 +539,7 @@ function getFormData() {
 }
 
 async function callAI(prompt) {
-  const response = await fetch('/.netlify/functions/generate', {
+  const response = await fetch('/api/generate', {
     method: 'POST', headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ prompt })
   });
@@ -811,7 +811,7 @@ function closePaymentModal() {
 async function processPayment() {
   try {
     // Create order
-    const res = await fetch('/.netlify/functions/generate', {
+    const res = await fetch('/api/generate', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ type: 'create_order' })
@@ -830,7 +830,7 @@ async function processPayment() {
       order_id: orderId,
       handler: async function(response) {
         // Verify payment
-        const verifyRes = await fetch('/.netlify/functions/generate', {
+        const verifyRes = await fetch('/api/generate', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
